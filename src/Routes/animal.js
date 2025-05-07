@@ -3,7 +3,7 @@ const verifyToken = require('./validate_token');
 const router = express.Router(); //manejador de rutas de express
 const animalSchema = require("../Models/animal");
 //Nuevo animal
-router.post("/animals", verifyToken, (req, res) => {
+router.post("/animals", (req, res) => {
     const animal = animalSchema(req.body);
     animal
         .save()
@@ -18,7 +18,7 @@ router.get("/animals",  (req, res) => {
         .catch((error) => res.json({ message: error }));
 });
 //Consultar un animal por su id
-router.get("/animals/:id",verifyToken, (req, res) => {
+router.get("/animals/:id", (req, res) => {
     const { id } = req.params;
     animalSchema
         .findById(id)
